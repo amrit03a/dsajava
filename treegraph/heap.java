@@ -191,7 +191,7 @@ import java.util.*;
 
 //priority queue wid object datatype
 
-class student implements Comparable<student>{
+/*class student implements Comparable<student>{
     int marks;
     String name;
     student(String name,int marks){
@@ -215,5 +215,205 @@ public class heap{
         pq.offer(new student("aman", 70));
         pq.offer(new student("mohit", 90));
         System.out.println(pq.peek());
+    }
+} */
+
+//top k frequency element --leet 347 
+
+//max pq 
+/*class number implements Comparable<number>{
+    int value;
+    int freq;
+    number(int value,int freq){
+        this.value=value;
+        this.freq=freq;
+    }
+    public int compareTo(number that){
+        //max heap
+        return that.freq-this.freq;
+    }
+}
+class heap{
+
+    public static int[] topkfrequent(int [] nums,int k ){
+        PriorityQueue<number> pq=new PriorityQueue<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i:nums){
+            map.put(i,map.getOrDefault(i,0)+1);
+        }
+        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+            number n =new number(entry.getKey(),entry.getValue());
+            pq.offer(n);
+        }
+        int []res=new int[k];
+        for(int i=0;i<k;i++){
+            res[i]=pq.poll().value;
+        }
+        return res;
+    }
+    public static void main(String[] args ){
+        Scanner sc=new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        System.out.println("enter the k valyue");
+        int k =sc.nextInt();
+        int [] ans=new int[k];
+        ans=topkfrequent(arr,k);
+        for(int i=0;i<k;i++){
+            System.out.print(ans[i]+" ");
+        }
+    }
+}*/
+
+//using min --little more optimised 
+
+/*class number implements Comparable<number>{
+    int value;
+    int freq;
+    number(int value,int freq){
+        this.value=value;
+        this.freq=freq;
+    }
+    public int compareTo(number that){
+        //min heap
+        return this.freq-that.freq;
+    }
+}
+class heap{
+
+    public static int[] topkfrequent(int [] nums,int k ){
+        PriorityQueue<number> pq=new PriorityQueue<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i:nums){
+            map.put(i,map.getOrDefault(i,0)+1);
+        }
+        int i=1;
+        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+            number n =new number(entry.getKey(),entry.getValue());
+            pq.offer(n);
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        int []res=new int[k];
+        for(int j=0;j<k;j++){
+            res[i]=pq.poll().value;
+        }
+        return res;
+    }
+    public static void main(String[] args ){
+        Scanner sc=new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        System.out.println("enter the k valyue");
+        int k =sc.nextInt();
+        int [] ans=new int[k];
+        ans=topkfrequent(arr,k);
+        for(int i=0;i<k;i++){
+            System.out.print(ans[i]+" ");
+        }
+    }
+}*/
+
+//leet-451 sort characters by frequency
+
+/*class letter implements Comparable<letter>{
+    char d;
+    int freq;
+    letter(char d,int freq){
+        this.d=d;
+        this.freq=freq;
+    }
+    public int compareTo(letter that){
+        return that.freq-this.freq;
+    }
+}
+class heap{
+
+    public static String sortchar(String s){
+        HashMap<Character,Integer> map=new HashMap<>();
+        PriorityQueue<letter> pq=new PriorityQueue<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            map.put(c,map.getOrDefault(c,0)+1);
+        }
+        for(Map.Entry<Character,Integer> entry:map.entrySet()){
+            letter l=new letter(entry.getKey(),entry.getValue());
+            pq.offer(l);
+        }
+        int l =map.size();
+        String a="";
+        while(!pq.isEmpty()){
+            letter curr=pq.poll();
+            for(int i=0;i<curr.freq;i++){
+                a=a+curr.d;
+            }
+        }
+        return a;
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();
+        System.out.println(sortchar(s));
+
+    }
+}*/
+
+class project implements Comparable<project>{
+    int profit;
+    int capital;
+    project(int profit,int capital){
+        this.profit=profit;
+        this.capital=capital;
+    }
+    public int compareTo(project that){
+        return this.capital-that.capital;
+    }
+}
+class heap{
+    public static int fincapital(int k,int[] capital,int[] profit,int n,int w){
+        PriorityQueue<project> pq1=new PriorityQueue<>();  //sort project by req capital
+        PriorityQueue<Integer> pq2=new PriorityQueue<>(Collections.reverseOrder());  //always give max profit project 
+        for(int i=0;i<n;i++){
+            pq1.offer(new project(profit[i], capital[i]));
+        }
+        while(k>0){
+            while(!pq1.isEmpty() && pq1.peek().capital<=w){
+                pq2.offer(pq1.poll().profit);
+            }
+            if(pq2.isEmpty()){
+                break;
+            }
+            w=w+pq2.poll();
+            k--;
+        }
+        return w;
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter the nb of project");
+        int n = sc.nextInt();
+        int[] capital=new int[n];
+        System.out.println("enter capital");
+        for(int i=0;i<n;i++){
+            capital[i]=sc.nextInt();
+        }
+        int[] profit=new int[n];
+        System.out.println("enter profit");
+        for(int i=0;i<n;i++){
+            profit[i]=sc.nextInt();
+        }
+        System.out.println("enter the k value");
+        int k=sc.nextInt();
+        System.out.println("enter the initial wealth ");
+        int w=sc.nextInt();
+        System.out.println("max wealth "+fincapital(k, capital, profit, n,w));
+
     }
 }
