@@ -1,6 +1,6 @@
 package treegraph;
 import java.util.*;
-public class heap {
+/*public class heap {
     int size;
     int heap[];
     int capacity;
@@ -108,6 +108,16 @@ public class heap {
         heapify(0);
         return;
     }
+    public void heapsort(){
+        int k=size;
+        for(int i =0;i<k;i++){
+            extractmaxandstore();
+        }
+        size=heap.length;
+        for(int i=0;i<size;i++){
+            System.out.print(heap[i]+" ");
+        }
+    }
 
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
@@ -128,6 +138,7 @@ public class heap {
             System.out.println("5. increase value");
             System.out.println("6. decrease value");
             System.out.println("7. insert");
+            System.out.println("8. heap sort");
             int choice=sc.nextInt();
             switch (choice) {
                 
@@ -168,8 +179,41 @@ public class heap {
                     h.insert(a);
                     break;
 
+                case 8:
+                    System.out.println("heap sort");
+                    h.heapsort();
+                    break;
             }   
 
         }
+    }
+}*/
+
+//priority queue wid object datatype
+
+class student implements Comparable<student>{
+    int marks;
+    String name;
+    student(String name,int marks){
+        this.marks=marks;
+        this.name=name;
+    }
+    public String toString(){
+        return "Student name :"+ this.name +" , marks :" + this.marks;
+    }
+    public int compareTo(student that){
+        if(this.marks==that.marks){
+            return this.name.compareTo(that.name);
+        }
+        return this.marks-that.marks;          //increasin order   //min heap 
+    }
+}
+public class heap{
+    public static void main(String[] args){
+        PriorityQueue<student> pq=new PriorityQueue<>();
+        pq.offer(new student("shashwat", 90));
+        pq.offer(new student("aman", 70));
+        pq.offer(new student("mohit", 90));
+        System.out.println(pq.peek());
     }
 }
