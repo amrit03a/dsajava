@@ -1,6 +1,16 @@
 package array;
 import java.util.*;
 public class arraystriver {
+
+    public static void reverse(int[] arr,int a,int b){
+        while(b>a){
+            int temp=arr[b];
+            arr[b]=arr[a];
+            arr[a]=temp;
+            b--;
+            a++;
+        }
+    }
     public static void main(String[] args){
         /*Scanner sc=new Scanner(System.in);
         int n =sc.nextInt();
@@ -22,10 +32,16 @@ public class arraystriver {
 
         //second smallest
 
+       /*Scanner sc=new Scanner(System.in);
+        int n =sc.nextInt();
+        int [] arr=new int[n];
+        for(int i =0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }*/
         /*if(n<2){
-            System.out.println("not exist");
+            System.out.println("nt possible ");
         }
-        int small = Integer.MAX_VALUE;
+        int small=Integer.MAX_VALUE;
         int secondsmall=Integer.MAX_VALUE;
         for(int i=0;i<n;i++){
             if(arr[i]<small){
@@ -39,49 +55,46 @@ public class arraystriver {
         System.out.println(secondsmall);*/
 
         //second largest 
-
         /*if(n<2){
-            System.out.println("nt possible");
+            System.out.println("nt possible ");
         }
-        int largest=Integer.MIN_VALUE;
-        int secondlargest = Integer.MIN_VALUE;
+        int large=Integer.MIN_VALUE;
+        int secondlaarge=Integer.MIN_VALUE;
         for(int i=0;i<n;i++){
-            if(arr[i]>largest){
-                secondlargest=largest;
-                largest=arr[i];
+            if(arr[i]>large){
+                secondlaarge=large;
+                large=arr[i];
             }
-            else if(arr[i]>secondlargest && arr[i]!=largest){
-                secondlargest=arr[i];
+            else if(arr[i]>secondlaarge && arr[i]!=large){
+                secondlaarge=arr[i];
             }
         }
-        System.out.println(secondlargest);*/
+        System.out.println(secondlaarge);*/
+
+        
 
         //check array is sorted or not 
-        /*boolean sorted=true;
-        for(int i =1;i<n;i++){
-            if(arr[i-1]>arr[i]){
+
+       /*boolean sorted=true;
+        for(int i=0;i<n-1;i++){
+            if(arr[i+1]<arr[i]){
                 sorted=false;
             }
         }
-        if(sorted){
-            System.out.println("sorted");
-        }
-        else{
-            System.out.println("ntt");
-        }*/
+        System.out.println(sorted);*/
 
         //remove duplicate elements
 
         /*Arrays.sort(arr);
-         int i =0;
-        for(int j =1;j<n;j++){
-            if(arr[j]!=arr[i]){
+        int i=0;
+        for(int j=1;j<n;j++){
+            if(arr[i]!=arr[j]){
                 i++;
                 arr[i]=arr[j];
             }
         }
-        for(int k=0;k<i+1;k++){
-            System.out.print(arr[k]);
+        for(int m=0;m<=i;m++){
+            System.out.print(arr[m]);
         }*/
 
         /*int [] arrr=new int[n];
@@ -96,32 +109,84 @@ public class arraystriver {
         for(int m=0;m<=k;m++){
             System.out.print(arrr[m]);
         }*/
+        Scanner sc=new Scanner(System.in);
+        int n =sc.nextInt();
+        int [] arr=new int[n];
+        for(int i =0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
 
+
+
+        //using hashset
+
+        /*HashSet<Integer> set=new HashSet<>();
+        for(int i =0;i<n;i++){
+            set.add(sc.nextInt());
+        }
+        System.out.println(set);*/
+        
     
         //left rotate by 1 place
+        
         /*int temp=arr[0];
-        for(int i =1;i<n;i++){
-            arr[i-1]=arr[i];
+        for(int i=0;i<n-1;i++){
+            arr[i]=arr[i+1];
         }
         arr[n-1]=temp;
         for(int m=0;m<n;m++){
             System.out.print(arr[m]);
         }*/
 
+
+
         //left rotate by k place 
 
         /*int k =sc.nextInt();
         int [] temp=new int[n];
         for(int i =0;i<n;i++){
-            temp[i]=arr[(i+k)%n];
+            temp[i]=arr[(i+k)%n];                       //imp---------------(i+k)%n
         }
         for(int m=0;m<n;m++){
             System.out.print(temp[m]);
         }*/
 
+       /*int k=sc.nextInt();
+       k=k%n;
+        int[] temp=new int[k];
+        for(int i=0;i<k;i++){
+            temp[i]=arr[i];
+        }
+        int l=0;
+        for(int i=0;i<n;i++){
+            if(i<n-k){
+                arr[i]=arr[i+k];
+            }
+            else{
+                arr[i]=temp[l++];
+            }
+        }
+        for(int m=0;m<n;m++){
+            System.out.print(arr[m]);
+        }*/
+
+        //using reverse algo
+
+        /*int k=sc.nextInt();
+        k=k%n;
+        reverse(arr,0,k-1);
+        reverse(arr,k,n-1);
+        reverse(arr,0,n-1);
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]);
+        }*/
+        
+
+
+
         //move zero to last
 
-        /*int j =-1;
+        /*int j=-1;                                               //j always points to the first zero and that of point to the next non zero
         for(int i=0;i<n;i++){
             if(arr[i]==0){
                 j=i;
@@ -131,16 +196,13 @@ public class arraystriver {
         if(j!=-1){
             for(int i=j+1;i<n;i++){
                 if(arr[i]!=0){
-                    int temp=arr[i];
-                    arr[i]=arr[j];
-                    arr[j]=temp;
+                    arr[j]=arr[i];
+                    arr[i]=0;
                     j++;
                 }
             }
-        }
-        for(int m=0;m<n;m++){
-            System.out.print(arr[m]);
         }*/
+
 
        /*int k=0;
         for(int i =0;i<n;i++){
@@ -175,6 +237,7 @@ public class arraystriver {
 
         //union
 
+
        /* int m =sc.nextInt();
         int [] arrr=new int[m];
         for(int i =0;i<m;i++){
@@ -189,59 +252,86 @@ public class arraystriver {
             union[k++]=arrr[i];
         }
         Arrays.sort(union);
-
         int i=0;
-        for(int j=1;j<n+m;j++){
-            if(union[j]!=union[i]){
-                 i++;
+        for(int j=1;j<n;j++){
+            if(union[i]!=union[j]){
+                i++;
                 union[i]=union[j];
             }
         }
-        for(int j=0;j<i+1;j++){
-            System.out.print(union[j]);
+        for(int k = 0; k <= i; k++){
+            System.out.print(union[k] + " ");
         }*/
 
+        
+        
+        /*int m =sc.nextInt();
+        int [] arrr=new int[m];
+        for(int i =0;i<m;i++){
+            arrr[i]=sc.nextInt();
+        }
+        HashSet<Integer> set=new HashSet<>();
+        for(int num : arr){
+            set.add(num);
+        }
+        for(int num : arrr){
+            set.add(num);
+        }
+        System.out.println(set);*/
+
+        
         //find absent
-       /*for(int i =1;i<=n;i++){
-            boolean found=false;
-            for(int j=0;j<n;j++){
-                if(arr[j]==i){
-                    found=true;
-                    break;
-                }
+        /*int  absent=-1;                 this method has some problems like it needs sorting and input problem 
+       for(int i=0;i<n;i++){
+            if(arr[i]!=i+1){                
+                absent=i+1;
             }
-             if(!found) {
-             System.out.println("Missing Number = " + i);
-             return;
-    }
-            }*/
+       }
+       System.out.println(absent);*/
+
+       //---another approach by creating hash array 
+
+       /*int [] hash=new int[n+1];
+       for(int i=0;i<n;i++){
+            hash[arr[i]]=1;
+       }
+       int missing=-1;
+       for(int i=1;i<=n;i++){
+            if(hash[i]==0){
+                missing=i;
+            }
+       }
+       System.out.println(missing);*/
+
+    //maximut consecutive one's
 
        /*int count=0;
-        int maxi=0;
-        for(int i =0;i<n;i++){
+       int max=0;
+       for(int i=0;i<n;i++){
             if(arr[i]==1){
                 count++;
             }
             else{
                 count=0;
             }
-            maxi=Math.max(maxi,count);
-        }
-        System.out.println(maxi);*/
+            max=Math.max(max,count);
+       }
+       System.out.println(max);*/
 
-        /*for(int i =0;i<n;i++){
-            int num=arr[i];
-            int count=0;
-            for(int j =0;j<n;j++){
-                if(arr[j]==num){
-                    count++;
-                }
+
+      //find the number appearing once
+
+      /*HashMap<Integer,Integer> map=new HashMap<>();
+      for(int i=0;i<n;i++){
+        map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+      }
+      for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+            if(entry.getValue()==1){
+                System.out.println(entry.getKey());
             }
-            if(count==1){
-                System.out.println(arr[i]);
-                break;
-            }
-        }*/
+      }*/
+
+
        
        /*int max = 0;
        int sin = -1;
@@ -651,9 +741,6 @@ public class arraystriver {
 
         //Merge two Sorted Arrays Without Extra Space
 
-
-        Scanner sc = new Scanner(System.in);
-
         /*int n = sc.nextInt();
         int[] nums1 = new int[n];
         for(int i = 0; i < n; i++) {
@@ -721,11 +808,11 @@ public class arraystriver {
         }
         System.out.println(count+" inversions");*/
 
-        int n = sc.nextInt();
+       /*  int n = sc.nextInt();
         int[] arr = new int[n];
         for(int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-        }
+        }*/
        /*int count=0;
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
